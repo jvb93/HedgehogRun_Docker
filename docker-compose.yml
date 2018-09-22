@@ -15,6 +15,6 @@ services:
       - database # link this service to the database service
 
   database: # name of the third service
-    image: mongo # specify image to build container from
+    image: andresvidal/rpi3-mongodb3 # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
