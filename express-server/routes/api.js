@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 /* GET all hogLos */
 router.get('/hoglogs', (req, res) => {
     Hoglog.find({}, (err, hoglog) => {
-        if (err) res.status(500).send(error)
+        if (err) res.status(500).send(err)
 
         res.status(200).json(hoglog);
     });
@@ -37,7 +37,7 @@ router.get('/hoglogs', (req, res) => {
 /* GET one hogLog */
 router.get('/hoglogs/:id', (req, res) => {
     Hoglog.findById(req.param.id, (err, hoglog) => {
-        if (err) res.status(500).send(error)
+        if (err) res.status(500).send(err)
 
         res.status(200).json(hoglog);
     });
@@ -46,21 +46,21 @@ router.get('/hoglogs/:id', (req, res) => {
 /* GET one hogLog */
 router.get('/hoglogs/fastest', (req, res) => {
     Hoglog.findOne({}, null, {sort: {ticks: 'desc'} },(err, hoglog) => {
-        if (err) res.status(500).send(error)
+        if (err) res.status(500).send(err)
         res.status(200).json(hoglog);
     }); 
 });
 
 router.get('/hoglogs/latest', (req, res) => {
     Hoglog.findOne({}, null, {sort: {timestamp: 'desc'} },(err, hoglog) => {
-        if (err) res.status(500).send(error)
+        if (err) res.status(500).send(err)
         res.status(200).json(hoglog);
     }); 
 });
 
 router.get('/hoglogs/timestamp/:timestamp', (req, res) => {
     Hoglog.find({ timestamp: {$gte : req.params.getTime}}, null, {sort: {timestamp: 'desc'} },(err, hoglog) => {
-        if (err) res.status(500).send(error)
+        if (err) res.status(500).send(err)
         res.status(200).json(hoglog);
     }); 
 });
