@@ -43,6 +43,30 @@ router.get('/hoglogs/:id', (req, res) => {
     });
 });
 
+/* GET one hogLog */
+router.get('/hoglogs/fastest', (req, res) => {
+    Hoglog.findOne({}, null, {sort: {ticks: 'desc'} },(err, hoglog) => {
+        if (err) res.status(500).send(error)
+        res.status(200).json(hoglog);
+    }); 
+});
+
+router.get('/hoglogs/latest', (req, res) => {
+    Hoglog.findOne({}, null, {sort: {timestamp: 'desc'} },(err, hoglog) => {
+        if (err) res.status(500).send(error)
+        res.status(200).json(hoglog);
+    }); 
+});
+
+router.get('/hoglogs/timestamp/:timestamp', (req, res) => {
+    Hoglog.find({ timestamp: {$gte : req.params.getTime}}, null, {sort: {timestamp: 'desc'} },(err, hoglog) => {
+        if (err) res.status(500).send(error)
+        res.status(200).json(hoglog);
+    }); 
+});
+
+ 
+
 /* Create a user. */
 router.post('/hoglogs', (req, res) => {
     var time = new Date().getTime();
