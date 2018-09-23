@@ -15,11 +15,8 @@ services:
       - database # link this service to the database service
 
   database: # name of the third service
-    image: andresvidal/rpi3-mongodb3 # specify image to build container from
+    image: zsimo/rpi-mongo # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
       - "28017:28017"
-    volumes:
-      - /data/db:/data/db'
-      - /data/configdb:/data/configdb
     command: mongod --rest
