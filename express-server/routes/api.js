@@ -9,13 +9,15 @@ const dbHost = 'mongodb://database/mean-docker';
 mongoose.connect(dbHost);
 
 // create mongoose schema
-const userSchema = new mongoose.Schema({
-  name: String,
-  age: Number
+const hogLog = new mongoose.Schema({
+  humidity: Number,
+  temperature_f: Number,
+  ticks: Number,
+  timestamp: Number
 });
 
 // create mongoose model
-const User = mongoose.model('User', userSchema);
+const Hoglog = mongoose.model('Hoglog', hogLog);
 
 
 /* GET api listing. */
@@ -23,36 +25,39 @@ router.get('/', (req, res) => {
         res.send('api works');
 });
 
-/* GET all users. */
-router.get('/users', (req, res) => {
-    User.find({}, (err, users) => {
+/* GET all hogLos */
+router.get('/hoglogs', (req, res) => {
+    Hoglog.find({}, (err, hoglog) => {
         if (err) res.status(500).send(error)
 
-        res.status(200).json(users);
+        res.status(200).json(hoglog);
     });
 });
 
-/* GET one users. */
-router.get('/users/:id', (req, res) => {
-    User.findById(req.param.id, (err, users) => {
+/* GET one hogLog */
+router.get('/hoglogs/:id', (req, res) => {
+    Hoglog.findById(req.param.id, (err, hoglog) => {
         if (err) res.status(500).send(error)
 
-        res.status(200).json(users);
+        res.status(200).json(hoglog);
     });
 });
 
 /* Create a user. */
-router.post('/users', (req, res) => {
-    let user = new User({
-        name: req.body.name,
-        age: req.body.age
+router.post('/Hoglog', (req, res) => {
+    var time = new Date().getTime();
+    let hoglog = new Hoglog({
+        humidity: req.body.Humidity,
+        temperature_f: req.body.TemperatureF,
+        ticks: req.body.Ticks,
+        timestamp: time
     });
 
-    user.save(error => {
+    hoglog.save(error => {
         if (error) res.status(500).send(error);
 
         res.status(201).json({
-            message: 'User created successfully'
+            message: 'Log created successfully'
         });
     });
 });
