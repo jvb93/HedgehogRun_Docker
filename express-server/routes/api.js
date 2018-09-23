@@ -44,7 +44,7 @@ router.get('/hoglogs/:id', (req, res) => {
 });
 
 /* Create a user. */
-router.post('/Hoglog', (req, res) => {
+router.post('/hoglogs', (req, res) => {
     var time = new Date().getTime();
     let hoglog = new Hoglog({
         humidity: req.body.Humidity,
