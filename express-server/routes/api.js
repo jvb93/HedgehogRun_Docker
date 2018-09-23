@@ -59,7 +59,7 @@ router.get('/hoglogs/latest', (req, res) => {
 });
 
 router.get('/hoglogs/timestamp/:timestamp', (req, res) => {
-    Hoglog.find({ timestamp: {$gte : req.params.getTime}}, null, {sort: {timestamp: 'desc'} },(err, hoglog) => {
+    Hoglog.find({ timestamp: {$gte : req.params.timestamp}}, null, {sort: {timestamp: 'desc'} },(err, hoglog) => {
         if (err) res.status(500).send(err)
         res.status(200).json(hoglog);
     }); 
