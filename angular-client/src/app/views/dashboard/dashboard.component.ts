@@ -191,20 +191,20 @@ export class DashboardComponent implements OnInit {
   }
 
   getFastest(){
-    this.http.get(`${this.API}/hoglogs/fastest`).pipe(
+    this.http.get(`${this.API}/fastest`).pipe(
       map(res => res.json())
     )
     .subscribe(fastest => {
-      this.fastest = fastest
+      this.fastest = fastest[0]
     })
   }
 
   getLatest(){
-    this.http.get(`${this.API}/hoglogs/latest`).pipe(
+    this.http.get(`${this.API}/latest`).pipe(
       map(res => res.json())
     )
     .subscribe(latest => {
-      this.latest = latest
+      this.latest = latest[0]
     })
   }
 
