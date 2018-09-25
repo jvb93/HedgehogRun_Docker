@@ -19,4 +19,4 @@ services:
     ports:
       - "27017:27017" # specify port forewarding
       - "28017:28017"
-    command: mongod --rest
+    command:  mongod --dbpath /data/db --repair --rest

@@ -45,9 +45,9 @@ router.get('/hoglogs/:id', (req, res) => {
 
 /* GET one hogLog */
 router.get('/hoglogs/fastest', (req, res) => {
-    Hoglog.find({}).sort({ticks: 'desc'}).limit(1).exec((err, hoglog)=>{
+    Hoglog.find({}, null, {sort: {"ticks": 'desc'} }).limit(1).exec((err, hoglog)=>{
         if (err) res.status(500).send(err)
-        res.status(200).json(hoglog[0]);
+        res.status(200).json(hoglog);
     })    
 });
 
