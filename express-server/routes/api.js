@@ -44,18 +44,20 @@ router.get('/hoglogs/:id', (req, res) => {
 });
 
 /* GET one hogLog */
-router.get('/hoglogs/fastest', (req, res) => {
+router.get('/fastest', (req, res) => {
     var query = Hoglog.find({});
-    query.sort({sort: {ticks: 'desc'}});
+    query.limit(1);
+    query.sort({ticks: 'desc'});
     query.exec((err, hoglog)=>{        
         if (err) res.status(500).send(err)
         res.status(200).json(hoglog);
     })   
 });
 
-router.get('/hoglogs/latest', (req, res) => {
+router.get('/latest', (req, res) => {
     var query = Hoglog.find({});
-    query.sort({sort: {timestamp: 'desc'}});
+    query.sort({timestamp: 'desc'});
+    query.limit(1);
     query.exec((err, hoglog)=>{        
         if (err) res.status(500).send(err)
         res.status(200).json(hoglog);
