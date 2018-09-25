@@ -45,10 +45,12 @@ router.get('/hoglogs/:id', (req, res) => {
 
 /* GET one hogLog */
 router.get('/hoglogs/fastest', (req, res) => {
-    Hoglog.find({}, null, {sort: {ticks: 'desc'} },(err, hoglog) => {
+    Hoglog.findOne().sort({ticks: -1}).exec(function(err, doc) {   
+        if (err) throw err;
         if (err) res.status(500).send(err)
-        res.status(200).json(hoglog[0]);
-    }); 
+        res.status(200).json(doc);
+    });
+    
 });
 
 router.get('/hoglogs/latest', (req, res) => {
