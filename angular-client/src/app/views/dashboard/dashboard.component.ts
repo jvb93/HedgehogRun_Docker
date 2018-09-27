@@ -13,7 +13,7 @@ import { Http } from '@angular/http';
 })
 export class DashboardComponent implements OnInit {
 
-  API = location.protocol + "//" + location.host;
+  API = location.protocol + "//" + location.host.split(':')[0];
 
   latest: IHogLog
   fastest: IHogLog
