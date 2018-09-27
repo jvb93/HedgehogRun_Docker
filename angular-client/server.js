@@ -24,7 +24,8 @@ app.get('*', (req, res) => {
 /**
  * Get port from environment and store in Express.
  */
-app.set('port', 8080);
+let port = 8080;
+app.set('port', port);
 
 /**
  * Create HTTP server.
