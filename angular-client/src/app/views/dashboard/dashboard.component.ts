@@ -13,7 +13,7 @@ import { Http } from '@angular/http';
 })
 export class DashboardComponent implements OnInit {
 
-  API = location.protocol + "//" + location.host + ":3000";
+  API = location.protocol + "//" + location.host;
 
   latest: IHogLog
   fastest: IHogLog
@@ -230,6 +230,7 @@ export class DashboardComponent implements OnInit {
   }
 
   constructor( private mph: MphPipe, private miles: MilesPipe, private http: Http){
+    console.log(this.API)
    this.getFastest()  
    this.getLatest()  
    this.getPastTwelveHours()  
