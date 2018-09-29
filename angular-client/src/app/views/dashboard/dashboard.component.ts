@@ -13,7 +13,7 @@ import { Http } from '@angular/http';
 })
 export class DashboardComponent implements OnInit {
 
-  API = location.protocol + "//" + location.host.split(':')[0] + ":3000";
+  API = 'http://192.168.1.210:3000';//location.protocol + "//" + location.host.split(':')[0] + ":3000";
 
   latest: IHogLog
   fastest: IHogLog
@@ -219,18 +219,17 @@ export class DashboardComponent implements OnInit {
       this.humidityChartOptions.series[0].data = log.map(l => [l.timestamp, l.humidity]);
       this.updateHumidityChartFlag = true;
       this.distanceChartOptions.series[0].data = log.map(l => [l.timestamp, this.mph.transform(l.ticks)]);
-      this.distanceChartOptions.series[1].data = log.map(l => [l.timestamp, this.mph.transform(l.ticks)]);
+      this.distanceChartOptions.series[1].data = log.map(l => [l.timestamp, l.ticks]);
       var sum = 0;
       this.distanceChartOptions.series[1].data.forEach((point)=>{
         sum += point[1]
-        point[1] =  this.miles.transform(sum);
+        point[1] = this.miles.transform(sum);
       })
       this.updateDistanceChartFlag = true;
     });
   }
 
   constructor( private mph: MphPipe, private miles: MilesPipe, private http: Http){
-    console.log(this.API)
    this.getFastest()  
    this.getLatest()  
    this.getPastTwelveHours()  
